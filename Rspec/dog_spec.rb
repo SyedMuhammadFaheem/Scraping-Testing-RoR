@@ -2,11 +2,22 @@ require 'rspec'
 require_relative 'dog'
 
 RSpec.describe Dog do
+
     describe '#bark' do
         it 'returns string "Woof!"' do
             expect(subject.bark).to eql("Woof!")
         end
     end    
+
+    describe '#feed' do
+        context 'feed the dog if it is hungry' do
+            subject {described_class.new(6)}
+            it 'return true' do
+                subject.feed
+                expect(subject).to_not be_hungry
+            end
+        end
+    end
 
     describe '#hungry?' do
         context 'when hunger_level is greater than 5' do
@@ -22,9 +33,6 @@ RSpec.describe Dog do
                 expect(subject).to_not be_hungry
             end
         end
-
-
-
     end
 
 end
